@@ -1,0 +1,13 @@
+{
+    "name": "hiitconsulting/technical-test-tchat",
+    "authors": [
+        {
+            "name": "Hamza Betouar",
+            "email": "betouar.hamza.89@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+    },
+    "require": {}
+}
