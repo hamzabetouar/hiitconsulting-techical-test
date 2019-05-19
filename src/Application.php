@@ -2,6 +2,9 @@
 namespace App;
 
 
+use App\Tools\Http\Request;
+use App\Tools\Route;
+
 class Application
 {
 
@@ -11,7 +14,28 @@ class Application
     private static $db = null;
 
     public static function run() {
+        $request = new Request();
+        $request->session->start();
 
+        $params = Route::getUrlParameters($request);
+
+        $controller = '\\App\Controller\\' . $params['controller'] . 'Controller';
+        if( class_exists($controller)  ){
+            $controller = new $controller($request);
+            call_user_func_array([$controller, $params['action']], $params['parameters']);
+        }
+        else{
+            /** @TODO end of project */
+            echo 'Class not defined'; die;
+        }
+    }
+
+    public function render($view, $data) {
+        extract($data);
+        ob_start();
+        require_once ROOT_DIR . '/src/View/' . $view . '.php';
+        $content = ob_get_clean();
+        require_once ROOT_DIR . '/src/View/layout.php';
     }
 
     /**
