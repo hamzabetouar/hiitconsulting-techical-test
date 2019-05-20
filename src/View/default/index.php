@@ -11,7 +11,7 @@
                 <h4 class="card-title text-center">Connexion </h4>
             </div>
             <div class="card-body">
-                <form action="/user/login" method="post">
+                <form action="<?=$request->server->getPath() ?>user/login" method="post">
 
                     <?php if(isset($login_err)): ?>
                         <div class="alert alert-danger">
@@ -44,7 +44,7 @@
             </div>
             <div class="card-body">
 
-                <form action="/user/register" method="post">
+                <form action="<?=$request->server->getPath() ?>user/register" method="post">
 
                     <?php if(isset($register_err)): ?>
                     <div class="alert alert-danger">

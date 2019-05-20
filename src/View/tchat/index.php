@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <a class="float-right" href="/user/logout">Se déconnecter</a>
+        <a class="float-right" href="<?=$request->server->getPath() ?>user/logout">Se déconnecter</a>
         <h3 class="card-title">Bonjour <?=$user->getUsername() ?> !</h3>
     </div>
     <div class="row" style="height: 500px;">
@@ -85,7 +85,7 @@
 
     function send() {
         if( $('#message').val() != '' ) {
-            $.post('/message/create', {
+            $.post('<?=$request->server->getPath() ?>message/create', {
                 uid: id, message: $('#message').val()
             }, function (response) {
                 addMessage({message: $('#message').val(), sender_id : <?=$user->getId() ?>}, new Date())
@@ -95,7 +95,7 @@
     }
 
     function getMessages() {
-        $.get('/message/messages?uid=' + id, function (response) {
+        $.get('<?=$request->server->getPath() ?>message/messages?uid=' + id, function (response) {
             for(i = 0; i < response.length; i++){
                 addMessage(response[i], new Date(response[i].created_at));
                 lastMessage = response[i].id
@@ -126,7 +126,7 @@
     }
 
     function checkMessage() {
-        $.get('/message/inbox?uid=' + id + '&mid=' + lastMessage, function (response) {
+        $.get('<?=$request->server->getPath() ?>message/inbox?uid=' + id + '&mid=' + lastMessage, function (response) {
             for(i = 0; i < response.length; i++){
                 addMessage(response[i], new Date(response[i].created_at));
                 lastMessage = response[i].id
@@ -137,7 +137,7 @@
     }
 
     function updateConnexion() {
-        $.get('/user/update', function (response) {
+        $.get('<?=$request->server->getPath() ?>user/update', function (response) {
 
             setTimeout(updateConnexion, 5000);
         })
@@ -150,7 +150,7 @@
     }
 
     function checkUsers() {
-        $.get('/user/checkUsers', function (response) {
+        $.get('<?=$request->server->getPath() ?>user/checkUsers', function (response) {
             for(i = 0; i < response.length; i++){
                 elm = $('#u' + response[i].id);
                 if(elm) {

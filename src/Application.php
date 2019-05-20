@@ -31,6 +31,7 @@ class Application
     }
 
     public function render($view, $data) {
+        $request = new Request();
         extract($data);
         ob_start();
         require_once ROOT_DIR . '/src/View/' . $view . '.php';

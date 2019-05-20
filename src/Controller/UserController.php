@@ -23,7 +23,7 @@ class UserController extends Controller
             $user->create();
 
             $this->request->session->set('user', $user);
-            $this->redirect('/tchat');
+            $this->redirect($this->request->server->getPath() .'tchat');
         }
 
     }
@@ -43,14 +43,14 @@ class UserController extends Controller
             ]);
         }else{
             $this->request->session->set('user', $user);
-            $this->redirect('/tchat');
+            $this->redirect($this->request->server->getPath() .'tchat');
         }
 
     }
 
     public function logout() {
         $this->request->session->remove('user');
-        $this->redirect('/');
+        $this->redirect($this->request->server->getPath());
     }
 
     public function update() {
